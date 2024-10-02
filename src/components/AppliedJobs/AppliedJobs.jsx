@@ -16,12 +16,14 @@ const AppliedJobs = () => {
     }
   }, [jobs]);
   const filteredContent = appliedJobs.filter((item) =>
-    filter ? item.remote_or_onsite === filter : true
+    filter === "all" || !filter ? true : item.remote_or_onsite === filter
   );
 
   return (
     <div className="mx-20">
-      <FilterDropdown setFilter={setFilter}></FilterDropdown>
+      <div className="flex justify-end">
+        <FilterDropdown setFilter={setFilter}></FilterDropdown>
+      </div>
       {filteredContent.map((job) => (
         <SingleJob key={job.id} singleJob={job}></SingleJob>
       ))}
